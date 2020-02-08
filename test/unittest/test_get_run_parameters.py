@@ -4,8 +4,9 @@ import unittest
 from unittest import TestCase
 
 import sys
-sys.path.insert(0, '../src/python')
-from digipath_toolkit import get_run_parameters, get_run_directory_and_run_file
+
+sys.path.insert(0, '../digipath_mltk')
+from toolkit import get_run_parameters, get_run_directory_and_run_file
 
 class Test_run_pars(TestCase):
 

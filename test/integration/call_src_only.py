@@ -41,8 +41,9 @@ SELECT = {"wsi_to_patches": image_2_tfrecord,
 
 def main():
     import sys
+
     #                                   relative path for Makefile calling this file from test/ directory
-    sys.path.insert(0, '../pychunklbl')
+    sys.path.insert(0, '../digipath_mltk')
 
     from toolkit import get_run_directory_and_run_file, get_run_parameters
 

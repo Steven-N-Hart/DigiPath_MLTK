@@ -1,3 +1,14 @@
+# slide image files
+.svs
+.tif
+.tiff
+.zvi
+.bif
+.mrxs
+.scn
+.jpg
+.ndpi
+
 # 
 .idea/
 git_not/

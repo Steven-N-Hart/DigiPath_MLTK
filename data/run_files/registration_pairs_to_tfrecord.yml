@@ -25,5 +25,5 @@ patch_stride_fraction:  0.5
 offset_x:               0
 offset_y:               0
 
-float_offset_x:         0
-float_offset_y:         0
+#float_offset_x:         0
+#float_offset_y:         0

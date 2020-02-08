@@ -6,8 +6,9 @@ import PIL
 import numpy as np
 
 import sys
-sys.path.insert(0, '../src/python')
-from digipath_toolkit import get_sample_selection_mask
+
+sys.path.insert(0, '../digipath_mltk')
+from toolkit import get_sample_selection_mask
 
 
 class Test_get_sample_selection_mask(TestCase):
