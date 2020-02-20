@@ -5,7 +5,7 @@ import argparse
 import logging
 import sys
 
-from pychunklbl.toolkit import *
+from digipath_mltk.toolkit import *
 
 
 def parse_args():
@@ -14,11 +14,15 @@ def parse_args():
 
     parser.add_argument("-m", "--method",
                         dest='method',
-                        default='wsi_2_patches_dir',
-                        choices=['wsi_2_patches_dir',
+                        default='wsi_to_patches_dir',
+                        choices=['wsi_to_tfrecord',
+                                 'tfrecord_to_masked_thumb',
+                                 'wsi_to_patches_dir',
                                  'write_mask_preview_set',
-                                 'wsi_to_patches',
-                                 'wrte_mask_preview_set'],
+                                 'registration_to_dir',
+                                 'registration_to_tfrecord',
+                                 'annotations_to_dir',
+                                 'annotations_to_tfrecord'],
                         help="Method to run")
 
     parser.add_argument("-i", "--wsi_filename",
@@ -135,6 +139,7 @@ def parse_args():
     run_parameters = dict()
     run_parameters['method'] = args.method
     run_parameters['wsi_filename'] = args.wsi_filename
+    run_parameters['wsi_floatname'] = args.wsi_floatname
     run_parameters['output_dir'] = args.output_dir
     run_parameters['class_label'] = args.class_label
     run_parameters['thumbnail_divisor'] = int(args.thumbnail_divisor)
@@ -154,23 +159,28 @@ def parse_args():
     run_parameters['xml_file_name'] = args.xml_file_name
     run_parameters['csv_file_name'] = args.csv_file_name
 
-    return run_parameters
+    clean_run_parameters = dict()
+    for k, v in run_parameters.items():
+        if not v is None:
+            clean_run_parameters[k] = v
+            
+    return clean_run_parameters
 
 
 if __name__ == "__main__":
     run_parameters = parse_args()
 
-    if run_parameters['method'] == 'write_mask_preview_set':
-        write_mask_preview_set(run_parameters)
-
-    if run_parameters['method'] == 'wsi_2_patches_dir':
-        image_file_to_patches_directory_for_image_level(run_parameters)
-
-    if run_parameters['method'] == 'wsi_to_patches':
+    if run_parameters['method'] == 'wsi_to_tfrecord':
         wsi_file_to_patches_tfrecord(run_parameters)
 
-    if run_parameters['method'] == 'tfrecord_2_masked_thumb':
+    if run_parameters['method'] == 'tfrecord_to_masked_thumb':
         write_tfrecord_marked_thumbnail_image(run_parameters)
+
+    if run_parameters['method'] == 'wsi_to_patches_dir':
+        image_file_to_patches_directory_for_image_level(run_parameters)
+
+    if run_parameters['method'] == 'write_mask_preview_set':
+        write_mask_preview_set(run_parameters)
 
     if run_parameters['method'] == 'registration_to_dir':
         run_registration_pairs(run_parameters)

@@ -1,13 +1,13 @@
 #                     Parameter set for make target: test_tfr_2_mthumb or test_tfr_2_mthumb_python2
 
 # method:             tfrecord_2_masked_thumb
-method:               tfrecord_2_masked_thumb
+method:               tfrecord_to_masked_thumb
 
 # tfrecord_file_name: tfrecord filename created from the wsi_filename
-tfrecord_file_name:   ../data/tfrecords/CMU-1-Small-Region.tfrecords
+tfrecord_file_name:   data/tfrecords/CMU-1-Small-Region.tfrecords
 
 # wsi_filename:       file name (with valid path)
-wsi_filename:         ../data/images/CMU-1-Small-Region.svs
+wsi_filename:         data/images/CMU-1-Small-Region.svs
 
 # output_dir:         writeable directory for the tfrecord
 output_dir:           ../../run_dir/results

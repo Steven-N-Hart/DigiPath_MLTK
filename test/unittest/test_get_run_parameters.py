@@ -5,8 +5,13 @@ from unittest import TestCase
 
 import sys
 
-sys.path.insert(0, '../digipath_mltk')
-from toolkit import get_run_parameters, get_run_directory_and_run_file
+try:
+    from digipath_mltk.toolkit import get_run_parameters, get_run_directory_and_run_file
+    print('using package installation of digipath_mltk ')
+except:
+    sys.path.insert(0, '../digipath_mltk')
+    from toolkit import get_run_parameters, get_run_directory_and_run_file
+    pass
 
 class Test_run_pars(TestCase):
 

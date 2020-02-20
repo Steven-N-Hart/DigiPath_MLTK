@@ -7,7 +7,6 @@ import os
 import tempfile
 from collections import defaultdict, OrderedDict
 import argparse
-import warnings
 
 import numpy as np
 import pandas as pd
@@ -431,7 +430,7 @@ def get_strided_patches_dict_for_image_level(run_parameters):
     else:
         patch_stride = 1.0
 
-    if 'wsi_floatname' in run_parameters:
+    if 'wsi_floatname' in run_parameters and not run_parameters['wsi_floatname'] is None:
         os_im_2_obj = openslide.OpenSlide(run_parameters['wsi_floatname'])
         arry_2_x_lngth, arry_2_y_lngth = os_im_2_obj.level_dimensions[image_level]
         os_im_2_obj.close()
@@ -665,7 +664,7 @@ def patch_name_parts_limit(name_str, space_replacer=None):
     return part_name
 
 
-def patch_name_parts_clean_with_warning(file_name_base, class_label):
+def patch_name_parts_clean_with_warning(file_name_base, class_label, show_warnings=False):
     """ Usage:  name_base_clean, class_label_clean = patch_name_parts_clean_with_warning(name_base, class_label)
                 sanitize case_id, class_label and file_ext so that they may be decoded
                 - warn user that input parameter changed
@@ -684,15 +683,16 @@ def patch_name_parts_clean_with_warning(file_name_base, class_label):
     par_change_warning = 'Input parameter changed.\t(for name readback decoding)'
     warn_format_str = '\n%s\nparameter:\t%s\nchanged to:\t%s\n'
 
-    name_base_clean = patch_name_parts_limit(file_name_base)
-    if name_base_clean != file_name_base:
-        warnings.warn(warn_format_str % (par_change_warning, file_name_base, name_base_clean))
+    name_base_clean = patch_name_parts_limit(file_name_base.strip())
+    if show_warnings == True and name_base_clean != file_name_base:
+        print(((warn_format_str) % (par_change_warning, file_name_base, name_base_clean)))
 
-    class_label_clean = patch_name_parts_limit(class_label)
-    if class_label_clean != class_label:
-        warnings.warn(warn_format_str % (par_change_warning, class_label, class_label_clean))
+    class_label_clean = patch_name_parts_limit(class_label.strip())
+    if show_warnings == True and class_label_clean != class_label:
+        print(((warn_format_str) % (par_change_warning, file_name_base, name_base_clean)))
 
     return name_base_clean, class_label_clean
+
 
 """                         Use Case 1 
 
@@ -1482,14 +1482,16 @@ def run_registration_pairs(run_parameters):
 
         run_parameters['offset_x'] = offset_x
         run_parameters['offset_y'] = offset_y
-        run_parameters['float_offset_x'] = -1 * offset_x
-        run_parameters['float_offset_y'] = -1 * offset_y
+
+        float_offset_x = -1 * offset_x
+        float_offset_y = -1 * offset_y
+
+    elif 'offset_x' in run_parameters and 'offset_y' in run_parameters:
+        float_offset_x = -1 * run_parameters['offset_x']
+        float_offset_y = -1 * run_parameters['offset_y']
 
     # form named parameters
     patch_size = (run_parameters['patch_width'], run_parameters['patch_height'])
-
-    float_offset_x = run_parameters['float_offset_x']
-    float_offset_y = run_parameters['float_offset_y']
 
     image_level = run_parameters['image_level']
 

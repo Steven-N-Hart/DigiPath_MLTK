@@ -1,8 +1,9 @@
-method:                 registration_to_dir
+method:                 registration_to_tfrecord
 
-wsi_filename:           ../../DigiPath_MLTK_data/RegistrationDevData/54742d6c5d704efa8f0814456453573a.tiff
-wsi_floatname:          ../../DigiPath_MLTK_data/RegistrationDevData/e39a8d60a56844d695e9579bce8f0335.tiff
-offset_data_file:       ../../DigiPath_MLTK_data/RegistrationDevData/wsi_pair_sample.csv
+wsi_filename:           ../../DigiPath_MLTK_data/integration_test_data/wsi_fixed.tiff
+wsi_floatname:          ../../DigiPath_MLTK_data/integration_test_data/wsi_float.tiff
+
+offset_data_file:       ../../DigiPath_MLTK_data/integration_test_data/wsi_pair_sample_offset.csv
 output_dir:             ../../run_dir/results
 
 class_label:            test-label-name
@@ -10,7 +11,7 @@ thumbnail_divisor:      20
 patch_select_method:    threshold_rgb2lab
 rgb2lab_threshold:      80
 
-image_level:            5
+image_level:            3
 patch_height:           224
 patch_width:            224
 threshold:              0
@@ -24,6 +25,3 @@ patch_stride_fraction:  0.5
 #                       These offsets will be filled in from the offset_data_file
 offset_x:               0
 offset_y:               0
-
-#float_offset_x:         0
-#float_offset_y:         0

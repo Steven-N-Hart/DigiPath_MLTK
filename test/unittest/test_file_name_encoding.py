@@ -3,8 +3,14 @@ from unittest import TestCase
 
 import sys
 
-sys.path.insert(0, '../digipath_mltk')
-from toolkit import dict_to_patch_name, patch_name_to_dict
+try:
+    from digipath_mltk.toolkit import dict_to_patch_name, patch_name_to_dict
+    print('using package installation of digipath_mltk ')
+except:
+    sys.path.insert(0, '../digipath_mltk')
+    from toolkit import dict_to_patch_name, patch_name_to_dict
+    pass
+
 
 class Test_patch_name_encoding(TestCase):
 

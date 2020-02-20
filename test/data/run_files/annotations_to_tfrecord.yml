@@ -3,13 +3,13 @@ method:                   annotations_to_tfrecord
     
 output_dir:               ../../run_dir/results
     
-wsi_filename:             ../../DigiPath_MLTK_data/RegistrationDevData/e39a8d60a56844d695e9579bce8f0335.tiff
-csv_file_name:            ../data/test_data/class_label_id_test.csv
-xml_file_name:            ../data/test_data/e39a8d60a56844d695e9579bce8f0335.xml
-    
+wsi_filename:             ../../DigiPath_MLTK_data/integration_test_data/wsi_float.tiff
+csv_file_name:            ../../DigiPath_MLTK_data/integration_test_data/annotation_class_label_id.csv
+xml_file_name:            ../../DigiPath_MLTK_data/integration_test_data/wsi_float_annotation.xml
+
 thumbnail_divisor:        56
 patch_stride_fraction:    1.0
-image_level:              4
+image_level:              3
     
 patch_height:             224
 patch_width:              224

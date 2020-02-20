@@ -1,10 +1,9 @@
-#                       Parameter set for make target: test_wsi_2_patches_dir or test_wsi_2_patches_dir_python2
+#                       Parameter set for make target: test_im_2_tfr or test_im_2_tfr_python2
 
-# method:               wsi_2_patches_dir
-method:                 wsi_2_patches_dir
+method:                 wsi_to_tfrecord
 
 # wsi_filename:         file name (with valid path)
-wsi_filename:           ../data/images/CMU-1-Small-Region.svs
+wsi_filename:           data/images/CMU-1-Small-Region.svs
 
 # output_dir:           writeable directory for the tfrecord
 output_dir:             ../../run_dir/results
@@ -12,14 +11,17 @@ output_dir:             ../../run_dir/results
 # class_label:          label name fiels for training
 class_label:            test_label_name
 
-# thumbnail_divisor:    wsi_image full size divisor to create thumbnail image
-thumbnail_divisor:      10
-
 # patch_height:         height in pixels
 patch_height:           224
 
 # patch_width:          width in pixels
 patch_width:            224
+
+# image_level:          openslide pyramid images level
+image_level:            0
+
+# thumbnail_divisor:    wsi_image full size divisor to create thumbnail image
+thumbnail_divisor:      10
 
 # patch_select_method:  threshold_rgb2lab  or  threshold_otsu
 patch_select_method:    threshold_rgb2lab
@@ -30,11 +32,7 @@ rgb2lab_threshold:      80
 
 #                       (Optional parameters)
 
-# file_ext:             default is .jpg
-file_ext:               .jpg
-
-# image_level:          openslide pyramid images level
-image_level:            0
+# file_ext:             default is omitted
 
 # threshold:            default is  0 - (image detail & patch size dependent)
 threshold:              0

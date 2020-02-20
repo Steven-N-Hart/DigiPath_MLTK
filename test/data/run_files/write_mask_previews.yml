@@ -4,7 +4,7 @@
 method:                 wrte_mask_preview_set
 
 # wsi_filename:         file name (with valid path)
-wsi_filename:           ../data/images/CMU-1-Small-Region.svs
+wsi_filename:           data/images/CMU-1-Small-Region.svs
 
 # output_dir:           ../../run_dir
 output_dir:             ../../run_dir

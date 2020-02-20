@@ -1,14 +1,12 @@
 """
-integration test file
+integration test file: use local src code only;
 
-Usage for Makefile calls to confirm code before moving to pypi
-
-relative path import logic for Makefile calling this file from test/ directory
+See test/Makefile to confirm coded behavior
 """
 
 def image_2_tfrecord(run_parameters):
-    from toolkit import run_imfile_to_tfrecord
-    run_imfile_to_tfrecord(run_parameters)
+    from toolkit import wsi_file_to_patches_tfrecord
+    wsi_file_to_patches_tfrecord(run_parameters)
 
 def tfrecord_2_masked_thumb(run_parameters):
     from toolkit import write_tfrecord_marked_thumbnail_image
@@ -30,9 +28,9 @@ def annotation_functions(run_parameters):
     from toolkit import run_annotated_patches
     run_annotated_patches(run_parameters)
 
-SELECT = {"wsi_to_patches": image_2_tfrecord,
-          "tfrecord_2_masked_thumb": tfrecord_2_masked_thumb,
-          'wsi_2_patches_dir': wsi_2_patches_dir,
+SELECT = {"wsi_to_tfrecord": image_2_tfrecord,
+          "tfrecord_to_masked_thumb": tfrecord_2_masked_thumb,
+          'wsi_to_patches_dir': wsi_2_patches_dir,
           'wrte_mask_preview_set': write_mask_preview,
           'registration_to_dir': registration_functions,
           'registration_to_tfrecord': registration_functions,
@@ -42,9 +40,8 @@ SELECT = {"wsi_to_patches": image_2_tfrecord,
 def main():
     import sys
 
-    #                                   relative path for Makefile calling this file from test/ directory
+    #      relative path for Makefile calling this file from test/ directory
     sys.path.insert(0, '../digipath_mltk')
-
     from toolkit import get_run_directory_and_run_file, get_run_parameters
 
     run_directory, run_file = get_run_directory_and_run_file(sys.argv[1:])
